@@ -41,7 +41,7 @@ let countPairComp = fun acc (a, b) ->  if b > a then acc + 1 else acc
 
 let comparePairs x = x |> Seq.pairwise |> Seq.fold countPairComp 0
 
-ins |>  comparePairs |> print
+//ins |>  comparePairs |> print
 
 // part2
 
@@ -62,4 +62,4 @@ input |> triplewise |> print
 
 input |> triplewise |> Seq.map Seq.sum |> print
 
-input |> triplewise |> Seq.map Seq.sum |> comparePairs |> print
+ins |> triplewise |> Seq.map Seq.sum |> comparePairs |> print
