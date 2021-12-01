@@ -37,3 +37,22 @@ input |> Seq.fold agg {hits = 0; prev = None} |> print
 input |> Seq.pairwise |> Seq.map (fun (a, b) -> b > a) |> Seq.fold (fun a b -> if b then a+1 else a) 0 |> print
 
 ins |> Seq.pairwise |> Seq.fold (fun acc (a, b) ->  if b > a then acc + 1 else acc) 0 |> print
+
+// part2
+
+
+let triplewise (source: seq<'T>) =
+ seq { use ie = source.GetEnumerator()
+      if ie.MoveNext() then
+          let mutable iref = ie.Current
+          while ie.MoveNext() do
+              let mutable jref = ie.Current
+              while ie.MoveNext() do
+                  let k = ie.Current
+                  yield [iref; jref; k]
+                  iref <- jref
+                  jref <- k }
+
+input |> triplewise |> print
+
+input |> triplewise |> Seq.map Seq.sum |> print
