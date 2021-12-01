@@ -32,11 +32,16 @@ let isLarger prev curr =
 let agg acc next  = { prev = Some next; hits = if isLarger acc.prev next then acc.hits + 1 else acc.hits }
 
 
+
 input |> Seq.fold agg {hits = 0; prev = None} |> print
 
 input |> Seq.pairwise |> Seq.map (fun (a, b) -> b > a) |> Seq.fold (fun a b -> if b then a+1 else a) 0 |> print
 
-ins |> Seq.pairwise |> Seq.fold (fun acc (a, b) ->  if b > a then acc + 1 else acc) 0 |> print
+let countPairComp = fun acc (a, b) ->  if b > a then acc + 1 else acc
+
+let comparePairs x = x |> Seq.pairwise |> Seq.fold countPairComp 0
+
+ins |>  comparePairs |> print
 
 // part2
 
@@ -56,3 +61,5 @@ let triplewise (source: seq<'T>) =
 input |> triplewise |> print
 
 input |> triplewise |> Seq.map Seq.sum |> print
+
+input |> triplewise |> Seq.map Seq.sum |> comparePairs |> print
