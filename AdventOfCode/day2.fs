@@ -4,21 +4,15 @@ type travelled = { depth: int; forwards: int; aim: int }
 
 let forward x =
     (fun acc ->
-        { forwards = acc.forwards + x
-          depth = acc.depth + (x * acc.aim)
-          aim = acc.aim })
+        { acc with
+              forwards = acc.forwards + x
+              depth = acc.depth + (x * acc.aim) })
 
 let down x =
-    (fun acc ->
-        { forwards = acc.forwards
-          depth = acc.depth
-          aim = acc.aim + x })
+    (fun acc -> { acc with aim = acc.aim + x })
 
 let up x =
-    (fun acc ->
-        { forwards = acc.forwards
-          depth = acc.depth
-          aim = acc.aim - x })
+    (fun acc -> { acc with aim = acc.aim - x })
 
 let input =
     [ forward 5
