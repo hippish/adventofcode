@@ -1,3 +1,4 @@
+module AdventOfCode.Day2
 type travelled = { depth: int; forwards: int; aim: int }
 
 

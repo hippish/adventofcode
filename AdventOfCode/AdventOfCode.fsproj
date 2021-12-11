@@ -8,6 +8,15 @@
     <ItemGroup>
         <Compile Include="day1.fs" />
         <Compile Include="day2.fs" />
+        <Compile Include="readfile.fs" />
+        <Content Include="Input\day3-test">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Input\day3">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Compile Include="day3.fs" />
+        <Compile Include="main.fs" />
     </ItemGroup>
 
 </Project>
