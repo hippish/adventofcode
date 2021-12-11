@@ -9,4 +9,5 @@ let binaryDisplayTuple tuple =
 
 let  [<EntryPoint>] main args =
     "day3" |> part1 |> printfn "power consumption: %A"
+    "day3" |> part2 |> printfn "life support rating %A"
     0
