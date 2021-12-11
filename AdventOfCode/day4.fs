@@ -80,3 +80,18 @@ let rec playRound (draw: int list, bingoBoards: BingoBoard list) =
 
 
 let part1 filename = filename |> getInputs |> playRound
+
+
+let rec findLoser (draw, bingoBoards) =
+    let number::draws = draw
+    let remainingBoards =
+        bingoBoards
+        |> List.map (fun board -> markBoard (number, board))
+        |> List.filter (fun board -> not <| hasBingo board)
+
+    match remainingBoards with
+    | [ loser ] -> playRound (draw, [loser])
+    | [] -> failwith "no boards remaining"
+    | _ -> findLoser (draws, remainingBoards)
+
+let part2 filename = filename |> getInputs |> findLoser
