@@ -28,4 +28,42 @@ let rec breedFish times fish =
 
 let calculateFishes filename times = filename |> parseFishies |> breedFish times |> List.length
 let part1 filename = calculateFishes filename 80
-let part2 filename = calculateFishes filename 256
+
+
+let updateFishes (fishes: int64[]) =
+    let breeding = fishes[0]
+    let mutable updated = [|0L..8L|];
+    for i = 1 to 8 do
+        updated[i-1] <- fishes[i]
+
+    updated[6] <- breeding + updated[6]
+    updated[8] <- breeding
+
+    updated
+
+let createInitialArray (fishies: (int * int)[]) =
+    let getCount index =
+        fishies
+        |> Array.tryFind (fun (age, count) -> index = age)
+        |> function
+        | Some (age, count) -> count |> int64
+        | None -> 0L
+
+    [|0..8|]
+    |> Array.map getCount
+
+let parseFish filename =
+    filename
+    |> ReadFile.readLines
+    |> Array.map (fun f -> f.Split ',' |> Array.map int)
+    |> Array.concat
+    |> Array.countBy id
+    |> createInitialArray
+
+let rec calculateFish times fish =
+    let bred = fish |> updateFishes
+    match times with
+    | 0 -> fish
+    | _ -> calculateFish (times - 1) bred
+
+let part2 filename = filename |> parseFish |> calculateFish 256 |> Array.sum
