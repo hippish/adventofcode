@@ -50,13 +50,16 @@ let rec getCoveredPoints points line =
     | _ -> getCoveredPoints hits (p1, { x= p2.x + dx; y = p2.y + dy})
 
 
-let calculateOverlappingPoints lines =
+let calculateOverlappingPoints filter lines =
     lines
-    |> List.filter isStraightLine
+    |> List.filter filter
     |> List.map (getCoveredPoints List.Empty)
     |> List.concat
     |> List.countBy id
     |> List.filter (fun (point, count) -> count > 1)
     |> List.length
 
-let part1 filename = filename |> parseInputs |> Array.toList |> calculateOverlappingPoints
+let calc filename filter = filename |> parseInputs |> Array.toList |> calculateOverlappingPoints filter
+let part1 filename = calc filename isStraightLine
+
+let part2 filename = calc filename (fun _ -> true)

@@ -12,5 +12,6 @@ let  [<EntryPoint>] main args =
     "day3" |> Day3.part2 |> printfn "life support rating %A"
     "day4" |> AdventOfCode.day4.part1 |> printfn "bingo score %A"
     "day4" |> AdventOfCode.day4.part2 |> printfn "bingo loser score %A"
-    "day5" |> day5.part1 |> printfn "d5 %A"
+    "day5-test" |> day5.part1 |> printfn "d5 points p1 %A"
+    "day5" |> day5.part2 |> printfn "d5 points p2 %A"
     0
