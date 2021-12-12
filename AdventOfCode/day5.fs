@@ -7,7 +7,7 @@ type Line = Point * Point
 
 let mapLine line: Line =
     let replaced =
-        Regex.Replace(line, "(\d+),(\d+).*(\d+),(\d+)", "$1,$2,$3,$4")
+        Regex.Replace(line, "(\d+),(\d+) -> (\d+),(\d+)", "$1,$2,$3,$4")
 
     let numbers =
         replaced.Split ','
@@ -26,15 +26,20 @@ let parseInputs filename =
     |> ReadFile.readLines
     |> Array.map mapLine
 
-let isHorizontal line =
-    match line with
-    | (p1, p2) when p1.x = p2.x -> true
-    | _ -> false
+let isHorizontal (p1,p2) =
+        p1.y = p2.y
+//    match line with
+//    | (p1, p2) when p1.x = p2.x -> true
+//    | _ -> false
 
-let isVertical line =
-    match line with
-    | (p1, p2) when p1.y = p2.y -> true
-    | _ -> false
+let isVertical (p1, p2) =
+    p1.x = p2.x
+//    match line with
+//    | (p1, p2) when p1.y = p2.y -> true
+//    | _ -> false
+
+let isStraightLine line =
+    isHorizontal line || isVertical line
 
 let getDelta x y =
     if x > y then 1
@@ -55,10 +60,11 @@ let rec getCoveredPoints points line =
 
 let calculateOverlappingPoints lines =
     lines
-    |> List.filter (fun line -> isHorizontal line || isVertical line)
+    |> List.filter isStraightLine
     |> List.map (getCoveredPoints List.Empty)
     |> List.concat
     |> List.countBy id
     |> List.filter (fun (point, count) -> count > 1)
     |> List.length
+
 let part1 filename = filename |> parseInputs |> Array.toList |> calculateOverlappingPoints
