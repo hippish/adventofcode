@@ -14,15 +14,24 @@ let getPositions crabs =
     [ for i = min to max do
           yield i ]
 
-let calculateFuel crabs position =
+let calculateFuel costfn crabs position =
     crabs
-    |> Array.fold (fun acc (pos, count) -> abs(pos - position) * count + acc) 0
+    |> Array.fold (fun acc (pos, count) -> (costfn pos position) * count + acc) 0
 
-let calculateMinFuel crabs =
+let calculateIncFuelCost start goal =
+    let min, max = if start > goal then goal, start else start, goal
+    let mutable cost = 0
+    for i = min to max-1 do
+        cost <- cost + i-min+1
+    cost
+
+let calculateMinFuel costfn crabs =
     crabs
     |> getPositions
-    |> List.map (calculateFuel crabs)
+    |> List.map (calculateFuel costfn crabs)
     |> List.min
 
 
-let part1 filename = filename |> parseCrabs |> calculateMinFuel
+let part1 filename = filename |> parseCrabs |> calculateMinFuel (fun a b -> abs(a-b))
+
+let part2 filename = filename |> parseCrabs |> calculateMinFuel calculateIncFuelCost
