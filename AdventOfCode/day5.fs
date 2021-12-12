@@ -26,20 +26,12 @@ let parseInputs filename =
     |> ReadFile.readLines
     |> Array.map mapLine
 
-let isHorizontal (p1,p2) =
-        p1.y = p2.y
-//    match line with
-//    | (p1, p2) when p1.x = p2.x -> true
-//    | _ -> false
-
-let isVertical (p1, p2) =
-    p1.x = p2.x
-//    match line with
-//    | (p1, p2) when p1.y = p2.y -> true
-//    | _ -> false
 
 let isStraightLine line =
-    isHorizontal line || isVertical line
+    match line with
+    | (p1, p2) when p1.y = p2.y -> true
+    | (p1, p2) when p1.x = p2.x -> true
+    | _ -> false
 
 let getDelta x y =
     if x > y then 1
