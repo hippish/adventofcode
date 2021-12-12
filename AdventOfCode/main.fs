@@ -14,4 +14,6 @@ let  [<EntryPoint>] main args =
     "day4" |> AdventOfCode.day4.part2 |> printfn "bingo loser score %A"
     "day5-test" |> day5.part1 |> printfn "d5 points p1 %A"
     "day5" |> day5.part2 |> printfn "d5 points p2 %A"
+    "day6" |> day6.part1 |> printfn "d6 fishies %A"
+    "day6" |> day6.part2 |> printfn "d6 lotsafishies %A"
     0
