@@ -18,6 +18,7 @@ let  [<EntryPoint>] main args =
 //    "day6" |> day6.part2 |> printfn "d6 lotsafishies %A"
 //    "day7" |> day7.part1 |> printfn "d7 crabs %A"
 //    "day7" |> day7.part2 |> printfn "d7 costly crabs %A"
-    "day8" |> day8.part1 |> printfn "d8 %A"
-    "day8" |> day8.part2 |> printfn "d8 %A"
+//    "day8" |> day8.part1 |> printfn "d8 %A"
+//    "day8" |> day8.part2 |> printfn "d8 %A"
+    "day9" |> day9.part1 |> printfn "d9 %A"
     0
