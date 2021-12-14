@@ -66,23 +66,28 @@ let neighbors (y, x) =
           (y, x - 1) //left
           (y, x + 1) ] //right
 
-let rec fillBasin (map: Map<Location, int>) (visited: Set<Location>) location =
-    let updated = Set.add location visited
+let rec fillBasin (map: Map<Location, int>) (visited: Set<Location>) locationToVisit =
 
-    match location with
-    | loc when map.ContainsKey loc |> not -> visited
-    | loc when map.[loc] >= 9 -> visited
-    | loc -> loc
-             |> neighbors
-             |> List.filter (fun l -> (visited.Contains l) |> not && map.ContainsKey l)
-             |> List.map (fillBasin map updated)
-             |> List.fold Set.union updated
+    match locationToVisit with
+    | []  -> visited
+//    | loc when map.[loc] >= 9 -> visited
+    | [loc] when map.[loc] >= 9 -> visited
+    | loc::toVisit ->
+             match loc with
+             | loc when map.ContainsKey loc |> not -> visited
+             | loc ->
+                 loc
+                 |> neighbors
+                 |> List.filter (fun l -> (visited.Contains l || List.contains l locationToVisit) |> not && map.ContainsKey l)
+                 |> List.filter (fun l -> map.[l] < 9)
+                 |> List.fold (fun acc n -> n :: acc) toVisit
+                 |> (fillBasin map (Set.add loc visited))
 
 let findBasins (map: Map<Location, int>) =
     let mutable basins: Set<Location> list = [];
     for k in map.Keys do
         if not <| List.exists (Set.contains k) basins then
-            basins <- (fillBasin map Set.empty k) :: basins
+            basins <- (fillBasin map Set.empty [k]) :: basins
     basins
 
 let getBasinProduct basins =
