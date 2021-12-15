@@ -67,3 +67,16 @@ let doTheFlash array =
     inner 0 (0, map)
 
 let part1 filename = filename |> ReadFile.readToIntChars |> doTheFlash
+
+let findsimuflash array =
+    let rec inner times (flashes, map: Map<Location,int>) =
+        match times with
+        | x when flashes = map.Count -> x
+        | x when times < 1000 ->
+            inner (x+1) (map |> updateOctopi 0)
+        | _ -> failwith "rec overflow"
+
+    let map = array |> toLocationMap
+    inner 0 (0, map)
+
+let part2 filename = filename |> ReadFile.readToIntChars |> findsimuflash
