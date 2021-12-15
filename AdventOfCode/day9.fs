@@ -1,6 +1,6 @@
 module AdventOfCode.day9
 
-open System.Collections.Generic
+open AdventOfCode.shared
 
 let parse filename =
     filename
@@ -52,13 +52,6 @@ let calculateMinRisk (array: int [] []) =
 
 let part1 filename = filename |> parse |> calculateMinRisk
 
-type Location = int * int
-
-let toLocationMap array =
-    array
-    |> Array.mapi (fun i arr -> arr |> Array.mapi (fun j value -> (i,j), value))
-    |> Array.collect id
-    |> Map
 
 let neighbors (y, x) =
         [ (y - 1, x) //up

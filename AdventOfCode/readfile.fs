@@ -8,3 +8,6 @@ let readLines filename =
 
 let readMap mapper filename =
     filename |> readLines |> Array.map mapper
+
+let readToIntChars filename =
+    filename |> readMap (fun line -> line.ToCharArray() |> Array.map  string |> Array.map int )

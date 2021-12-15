@@ -1,14 +1,14 @@
 module AdventOfCode.Main
 
 open AdventOfCode
-open Day3
 
 let binaryDisplayTuple tuple =
     match tuple with
-    | (a,b) -> printfn "%B, %B" a b
+    | (a, b) -> printfn "%B, %B" a b
 
-let  [<EntryPoint>] main args =
-//    "day3" |> Day3.part1 |> printfn "power consumption: %A"
+[<EntryPoint>]
+let main args =
+    //    "day3" |> Day3.part1 |> printfn "power consumption: %A"
 //    "day3" |> Day3.part2 |> printfn "life support rating %A"
 //    "day4" |> AdventOfCode.day4.part1 |> printfn "bingo score %A"
 //    "day4" |> AdventOfCode.day4.part2 |> printfn "bingo loser score %A"
@@ -20,8 +20,9 @@ let  [<EntryPoint>] main args =
 //    "day7" |> day7.part2 |> printfn "d7 costly crabs %A"
 //    "day8" |> day8.part1 |> printfn "d8 %A"
 //    "day8" |> day8.part2 |> printfn "d8 %A"
-    "day9" |> day9.part1 |> printfn "d9 %A"
-    "day9" |> day9.part2 |> printfn "d9 p2 %A"
-    "day10" |> day10.part1 |> printfn "d10 %A"
-    "day10" |> day10.part2 |> printfn "d10 %A"
+//    "day9" |> day9.part1 |> printfn "d9 %A"
+//    "day9" |> day9.part2 |> printfn "d9 p2 %A"
+//    "day10" |> day10.part1 |> printfn "d10 %A"
+//    "day10" |> day10.part2 |> printfn "d10 %A"
+    "day11" |> day11.part1 |> printfn "d11 %A"
     0
