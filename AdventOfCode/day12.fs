@@ -63,24 +63,25 @@ let isValidPath (visited: Node list) (node: Node) =
     | SmallCave s when List.contains (SmallCave s) visited -> false
     | _ -> true
 
-let travel (graph: Graph) =
+let travel pathValidator (graph: Graph) =
     let (nodes, edges) = graph
     let start = nodes |> Seq.find (fun n -> n = SmallCave "start")
 
     let rec walk visited node = [
+        let visit = node::visited
         let paths =
             node
             |> findPaths edges
-            |> List.filter (isValidPath visited)
+            |> List.filter (pathValidator visit)
             |> Set.ofList
             |> Set.toList
         match node with
-        | SmallCave s when s = "end" -> yield node::visited
+        | SmallCave s when s = "end" -> yield visit
         | _ ->
             match paths with
             | [] -> yield []
             | _ ->
-                for p in  paths |> List.map (walk (node::visited)) do
+                for p in  paths |> List.map (walk visit) do
                     for p' in p do
                         yield p'
 
@@ -88,12 +89,28 @@ let travel (graph: Graph) =
 
     walk [] start
 
-let findAllPaths graph =
+let findAllPaths pathValidator graph =
     let paths =
         graph
-        |> travel
+        |> travel pathValidator
         |> List.filter (fun l -> List.isEmpty l |> not)
         |> List.map List.rev
 
-    paths.Length, paths
-let part1 filename = filename |> parseGraph |> findAllPaths
+    paths, paths.Length
+let part1 filename = filename |> parseGraph |> findAllPaths isValidPath
+
+let isSmallCave node =
+    match node with
+    | SmallCave s -> true
+    | _ -> false
+let isValidPathWithRevisit (visited: Node list) (node: Node) =
+    match node with
+    | SmallCave s when s = "start" -> List.contains (SmallCave s) visited |> not
+    | SmallCave s when s = "end" -> true
+    | SmallCave s ->
+        match List.filter isSmallCave visited |> List.countBy id |> List.tryFind (fun (n, c) -> c > 1) with
+        | Some _ -> List.contains (SmallCave s) visited |> not
+        | _ -> true
+    | _ -> true
+
+let part2 filename = filename |> parseGraph |> findAllPaths isValidPathWithRevisit

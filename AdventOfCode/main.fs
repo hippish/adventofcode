@@ -26,5 +26,6 @@ let main args =
 //    "day10" |> day10.part2 |> printfn "d10 %A"
 //    "day11" |> day11.part1 |> printfn "d11 %A"
 //    "day11" |> day11.part2 |> printfn "d11 2 %A"
-    "day12" |> day12.part1 |> printfn "d12 %A"
+//    "day12" |> day12.part1 |> printfn "d12 %A"
+    "day12" |> day12.part2 |> printfn "d12 with revisit %A"
     0
