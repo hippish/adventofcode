@@ -6,6 +6,7 @@ let binaryDisplayTuple tuple =
     match tuple with
     | (a, b) -> printfn "%B, %B" a b
 
+let p (s:string) a = a |> printfn "%s %A" s
 [<EntryPoint>]
 let main args =
     //    "day3" |> Day3.part1 |> printfn "power consumption: %A"
@@ -28,6 +29,8 @@ let main args =
 //    "day11" |> day11.part2 |> printfn "d11 2 %A"
 //    "day12" |> day12.part1 |> printfn "d12 %A"
 //    "day12" |> day12.part2 |> printfn "d12 with revisit %A"
-    "day13" |> day13.part1 |> printfn "d13 p1 %A"
-    "day13" |> day13.part2 |> List.map (printfn "%A")
+//    "day13" |> day13.part1 |> printfn "d13 p1 %A"
+//    "day13" |> day13.part2 |> List.map (printfn "%A")
+//    "day14" |> day14.part1 |> p "d14"
+    "day14" |> day14.part2 |> p "d14 p2"
     0
