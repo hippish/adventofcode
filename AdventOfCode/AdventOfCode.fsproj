@@ -83,8 +83,14 @@
         <Content Include="Input\day14">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Content Include="Input\day15-test">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Input\day15">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Compile Include="shared\Location.fs" />
-        <Compile Include="readfile.fs" />
+        <Compile Include="shared\readfile.fs" />
         <Compile Include="day3.fs" />
         <Compile Include="day4.fs" />
         <Compile Include="day5.fs" />
@@ -97,6 +103,7 @@
         <Compile Include="day12.fs" />
         <Compile Include="day13.fs" />
         <Compile Include="day14.fs" />
+        <Compile Include="day15.fs" />
         <Compile Include="main.fs" />
     </ItemGroup>
 

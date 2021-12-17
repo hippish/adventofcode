@@ -32,5 +32,6 @@ let main args =
 //    "day13" |> day13.part1 |> printfn "d13 p1 %A"
 //    "day13" |> day13.part2 |> List.map (printfn "%A")
 //    "day14" |> day14.part1 |> p "d14"
-    "day14" |> day14.part2 |> p "d14 p2"
+//    "day14" |> day14.part2 |> p "d14 p2"
+    "day15" |> day15.part1 |> p "d15"
     0
